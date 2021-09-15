@@ -1469,18 +1469,18 @@ copia_lista_ventas = lista_ventas.copy()
 lista_ventas_ordenada = []
 
 for i in range(len(lista_ventas)-1):
+  venta_max = copia_lista_ventas[0][1]
+  posicion_max = 0
 
-    venta_max = copia_lista_ventas[0][1]
-    posicion_max = 0
-    for j in range(len(copia_lista_ventas)-1): 
-        venta_sig = copia_lista_ventas[j+1][1]
-        
-        if venta_sig >= venta_max:
-            venta_max = venta_sig
-            posicion_max = j+1
+  for j in range(len(copia_lista_ventas)-1): 
+    venta_sig = copia_lista_ventas[j+1][1]
     
-    lista_ventas_ordenada.append(copia_lista_ventas[posicion_max])
-    copia_lista_ventas.pop(posicion_max)
+    if venta_sig >= venta_max:
+      venta_max = venta_sig
+      posicion_max = j+1
+  
+  lista_ventas_ordenada.append(copia_lista_ventas[posicion_max])
+  copia_lista_ventas.pop(posicion_max)
 
 lista_ventas_ordenada.append(copia_lista_ventas[0])
 
@@ -1569,14 +1569,12 @@ eleccion = 20
 while eleccion != 0:
   if ingreso == "loGiN28":
     print("Elige la opción que deseas ver")
-    print("1. Lista de los productos con mayores ventas \n"+
-    "2. Lista de los productos con menores ventas \n"+
-    "3. Lista de los productos con mayores búsquedas \n"+
-    "4. Lista de los productos con menores búsquedas \n"+
-    "5. Lista de los productos con mejores reseñas \n"+
-    "6. Lista de los productos con peores reseñas \n"+
-    "7. Lista de los productos con menores ventas por mes \n"+
-    "8. Lista de los productos con mayores ventas por mes \n"
+    print("1. Lista de los productos con mayores búsquedas \n"+
+    "2. Lista de los productos con menores búsquedas \n"+
+    "3. Lista de los productos con mejores reseñas \n"+
+    "4. Lista de los productos con peores reseñas \n"+
+    "5. Lista de los productos con mayores ventas por mes \n"+
+    "6. Lista de los productos con menores ventas por mes \n"
     "0. Salir del menú"+"\n")
 
 
@@ -1584,28 +1582,10 @@ while eleccion != 0:
 
     while eleccion != 0:
       print(limpiarPantalla)
-      if eleccion > 0 and eleccion < 9:
-
-        # PRODCUTOS CON MAYORES VENTAS
-        if eleccion == 1:
-          print("| Número"+"| ID producto"+"\t"+"| Num. ventas")
-          print(separador)
-          for i in range(15):
-            id_producto = lista_ventas_ordenada[i][0]
-            num_venta = lista_ventas_ordenada[i][1]
-            print("\t"+str(i+1)+"\t"+str(id_producto)+3*"\t"+str(num_venta)) 
-
-        # PRODUCTOS CON MENORES VENTAS
-        elif eleccion == 2:
-          print("Número"+"| ID producto"+"\t"+"| Num. ventas")
-          print(separador)
-          for i in range(1,6):
-            id_producto = lista_ventas_ordenada[-i][0]
-            num_venta = lista_ventas_ordenada[-i][1]
-            print("\t"+str(len(lifestore_products)-i+1)+2*"\t"+str(id_producto)+3*"\t"+str(num_venta))
+      if eleccion > 0 and eleccion < 7:
         
         # PRODUCTOS CON MAYORES BÚSQUEDAS
-        elif eleccion == 3:
+        if eleccion == 1:
           print("Número"+"| ID producto"+"\t"+"| Num. busqueda")
           print(separador)
           for i in range(19):
@@ -1614,7 +1594,7 @@ while eleccion != 0:
             print("\t"+str(i+1)+2*"\t"+str(id_producto)+3*"\t"+str(num_busqueda))
 
         # PRODUCTOS CON MENORES BÚSQUEDAS
-        elif eleccion == 4:
+        elif eleccion == 2:
           print("Número"+"| ID producto"+"\t"+"| Num. busquedas")
           print(separador)
           for i in range(1,20):
@@ -1623,7 +1603,7 @@ while eleccion != 0:
             print("\t"+str(len(lifestore_products)-i+1)+2*"\t"+str(id_producto)+3*"\t"+str(num_busqueda))
 
         # PRODUCTOS CON MEJORES RESEÑAS
-        elif eleccion == 5:
+        elif eleccion == 3:
           print("Número"+"| ID producto"+"\t"+"| Promedio reviews")
           print(separador)
           for i in range(19):
@@ -1632,7 +1612,7 @@ while eleccion != 0:
             print("\t"+str(i+1)+2*"\t"+str(id_producto)+3*"\t"+str(num_review))
         
         # PRODUCTOS CON PEORES RESEÑAS
-        elif eleccion == 6:
+        elif eleccion == 4:
           print("Número"+"| ID producto"+"\t"+"| Promedio reviews")
           print(separador)
           cantidad = 1
@@ -1645,7 +1625,7 @@ while eleccion != 0:
               
               cantidad += 1
             num += 1
-        elif eleccion == 7:
+        elif eleccion == 5:
           anio = input("¿De qué año desea ver el listado? (2019, 2020): " )
           mes = input("¿De qué mes desea ver el listado? (01,02,03,...): ")
           lista_ventas_mes = []
@@ -1699,7 +1679,7 @@ while eleccion != 0:
             num_venta = lista_ventas_mes_ordenada[i][1]
             print("\t"+str(i+1)+2*"\t"+str(id_producto)+5*"\t"+str(num_venta)+3*"\t"+str(mes)+"\t"+str(anio)) 
 
-        elif eleccion == 8:
+        elif eleccion == 6:
           anio = input("¿De qué año desea ver el listado? (2019, 2020): " )
           mes = input("¿De qué mes desea ver el listado? (01,02,03,...): ")
           lista_ventas_mes = []
@@ -1748,10 +1728,10 @@ while eleccion != 0:
 
           print("| Número"+"| ID producto"+"\t"+"| Num. ventas"+"\t"+"| Mes"+"| Año")
           print(separador)
-          for i in range(1,16):
+          for i in range(1,11):
             id_producto = lista_ventas_mes_ordenada[-i][0]
             num_venta = lista_ventas_mes_ordenada[-i][1]
-            print("\t"+str(i+1)+2*"\t"+str(id_producto)+5*"\t"+str(num_venta)+3*"\t"+str(mes)+"\t"+str(anio)) 
+            print("\t"+str(i)+2*"\t"+str(id_producto)+5*"\t"+str(num_venta)+3*"\t"+str(mes)+"\t"+str(anio)) 
 
 
         # VISUALIZAR EL NOMBRE DEL PRODCUTO    
@@ -1769,27 +1749,23 @@ while eleccion != 0:
           print("\t "+str(id_producto)+"\t "+str(lifestore_products[id_producto-1][1]))
 
         
-        print("\n1. Lista de los productos con mayores ventas \n"+
-        "2. Lista de los productos con menores ventas \n"+
-        "3. Lista de los productos con mayores búsquedas \n"+
-        "4. Lista de los productos con menores búsquedas \n"+
-        "5. Lista de los productos con mejores reseñas \n"+
-        "6. Lista de los productos con peores reseñas \n"+
-        "7. Lista de los productos con menores ventas por mes \n"+
-        "8. Lista de los productos con mayores ventas por mes \n"
+        print("1. Lista de los productos con mayores búsquedas \n"+
+        "2. Lista de los productos con menores búsquedas \n"+
+        "3. Lista de los productos con mejores reseñas \n"+
+        "4. Lista de los productos con peores reseñas \n"+
+        "5. Lista de los productos con mayores ventas por mes \n"+
+        "6. Lista de los productos con menores ventas por mes \n"
         "0. Salir del menú"+"\n")
         
         eleccion = int(input("Elige -> "))  
       else:
         print("Elige una opción válida")
-        print("1. Lista de los productos con mayores ventas \n"+
-        "2. Lista de los productos con menores ventas \n"+
-        "3. Lista de los productos con mayores búsquedas \n"+
-        "4. Lista de los productos con menores búsquedas \n"+
-        "5. Lista de los productos con mejores reseñas \n"+
-        "6. Lista de los productos con peores reseñas \n"+
-        "7. Lista de los productos con menores ventas por mes \n"+
-        "8. Lista de los productos con mayores ventas por mes \n"
+        print("1. Lista de los productos con mayores búsquedas \n"+
+        "2. Lista de los productos con menores búsquedas \n"+
+        "3. Lista de los productos con mejores reseñas \n"+
+        "4. Lista de los productos con peores reseñas \n"+
+        "5. Lista de los productos con mayores ventas por mes \n"+
+        "6. Lista de los productos con menores ventas por mes \n"
         "0. Salir del menú"+"\n")
         
         eleccion = int(input("Elige -> "))
